@@ -1,0 +1,43 @@
+Welcome!
+
+fluttery_audio is a general purpose audio plugin for Flutter. That means it plays audio. The fluttery_audio plugin is implemented for both iOS and Android.
+
+Pages:
+
+A: Imperative Button List
+
+ - Visually a list of buttons + slider
+ - Implementation controls audio
+   imperatively
+
+B: Declarative Button List
+   (no components)
+
+ - Visually a list of buttons + slider
+ - Implementation controls audio
+   declaratively (with Widgets)
+ - Audio component Widgets are not used
+ - Audio automatically loads when screen
+   appears
+
+C: Declarative Button List
+   (with components)
+
+ - Visually a list of button + slider
+ - Implementation controls audio
+   declaratively (with Widgets)
+ - Audio component Widgets are used
+ - Audio automatically loads when screen
+   appears
+
+D: Declarative Playlist
+   (with components)
+
+ - Visually a row of audio buttons + slider
+ - Implementation controls audio
+   declaratively (with Widgets)
+ - Audio component Widgets are used
+ - Audio automatically loads when screen
+   appears
+ - Previous/Next buttons move through
+   playlist
