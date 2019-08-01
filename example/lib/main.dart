@@ -6,13 +6,13 @@ import 'package:lee_musics_example/imperative_button_list.dart';
 import 'package:lee_musics_example/screen_welcome.dart';
 import 'package:lee_musics_example/declarative_button_list_components.dart';
 import 'package:flutter/material.dart';
-//import 'package:logging/logging.dart';
+import 'package:lee_logging/lee_logging.dart';
 
 void main() {
-//	Logger.root.level = Level.ALL;
-//	Logger.root.onRecord.listen((LogRecord rec) {
-//		print('${rec.level.name}: ${rec.time}: ${rec.loggerName}: ${rec.message}');
-//	});
+	Logger.root.level = Level.ALL;
+	Logger.root.onRecord.listen((LogRecord rec) {
+		print('${rec.level.name}: ${rec.time}: ${rec.loggerName}: ${rec.message}');
+	});
 	
 	runApp(new MyApp());
 }

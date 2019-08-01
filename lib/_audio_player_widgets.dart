@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:lee_musics/lee_musics.dart';
 import 'package:lee_musics/_audio_player.dart';
-//import 'package:logging/logging.dart';
+import 'package:lee_logging/lee_logging.dart';
 //import 'package:meta/meta.dart';
 
-//final _log = new Logger('AudioPlayerWidget');
+final _log = new Logger('AudioPlayerWidget');
 
 class Audio extends StatefulWidget {
 	static AudioPlayer of(BuildContext context) {
@@ -54,7 +54,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	@override
 	void didUpdateWidget(Widget oldWidget) {
 		super.didUpdateWidget(oldWidget);
-//		_log.fine('Widget changed. Updating Audio Widget state.');
+		_log.fine('Widget changed. Updating Audio Widget state.');
 		_synchronizeStateWithWidget();
 	}
 	
@@ -63,7 +63,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	@override
 	void reassemble() {
 		super.reassemble();
-//		_log.fine('reassemble()');
+		_log.fine('reassemble()');
 		_synchronizeStateWithWidget();
 	}
 	
@@ -71,7 +71,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 		_setAudioUrl(widget.audioUrl);
 		
 		if (widget.playbackState != _playbackState) {
-//			_log.fine('The desired audio playback state has changed to: ${widget.playbackState}');
+			_log.fine('The desired audio playback state has changed to: ${widget.playbackState}');
 			_playbackState = widget.playbackState;
 			if (_playbackState == PlaybackState.playing) {
 				_player.play();
@@ -98,7 +98,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	
 	@override
 	Widget build(BuildContext context) {
-//		_log.fine('building');
+		_log.fine('building');
 		if (widget.playerBuilder != null) {
 			return widget.playerBuilder(context, _player, widget.child);
 		} else if (widget.child != null) {
@@ -116,12 +116,12 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	
 	@override
 	onAudioReady() {
-//		_log.fine('on audio ready');
+		_log.fine('on audio ready');
 		if (_playbackState == PlaybackState.playing) {
 			_player.play();
-//			_log.fine('playing automatically');
+			_log.fine('playing automatically');
 		} else if (_playbackState == PlaybackState.paused) {
-//			_log.fine('not playing because client doesn\'t want it');
+			_log.fine('not playing because client doesn\'t want it');
 		}
 		
 		if (widget.callMe.contains(WatchableAudioProperties.audioLength)) {
@@ -134,7 +134,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	
 	@override
 	onAudioStateChanged(AudioPlayerState audioState) {
-//		_log.fine('on state changed: $audioState');
+		_log.fine('on state changed: $audioState');
 		if (widget.callMe.contains(WatchableAudioProperties.audioPlayerState)) {
 			widget.playerCallback(context, _player);
 		}
@@ -145,7 +145,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	
 	@override
 	onBufferingUpdate(int percent) {
-		//    _log.fine('on buffering update: $percent');
+		    _log.fine('on buffering update: $percent');
 		if (widget.callMe.contains(WatchableAudioProperties.audioBuffering)) {
 			widget.playerCallback(context, _player);
 		}
@@ -165,7 +165,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	
 	@override
 	onPlayerPositionChanged(Duration position) {
-		//    _log.fine('on playback update: $position');
+		    _log.fine('on playback update: $position');
 		if (widget.callMe.contains(WatchableAudioProperties.audioPlayhead)) {
 			widget.playerCallback(context, _player);
 		}
@@ -188,7 +188,7 @@ class _AudioState extends State<Audio> implements AudioPlayerListener {
 	}
 	
 	void _onSeekingChanged(bool isSeeking) {
-//		_log.fine('on seeking changed: $isSeeking');
+		_log.fine('on seeking changed: $isSeeking');
 		if (widget.callMe.contains(WatchableAudioProperties.audioSeeking)) {
 			widget.playerCallback(context, _player);
 		}
@@ -271,7 +271,7 @@ class _AudioComponentState extends State<AudioComponent> implements AudioPlayerL
 	
 	@override
 	onAudioStateChanged(AudioPlayerState audioState) {
-//		_log.fine('onStateChanged: $audioState');
+		_log.fine('onStateChanged: $audioState');
 		if (widget.updateMe.contains(WatchableAudioProperties.audioPlayerState)) {
 			setState(() {});
 		}
@@ -314,7 +314,7 @@ class _AudioComponentState extends State<AudioComponent> implements AudioPlayerL
 	}
 	
 	void _onSeekingChanged(bool isSeeking) {
-//		_log.fine('onSeekingChanged: $isSeeking');
+		_log.fine('onSeekingChanged: $isSeeking');
 		if (widget.updateMe.contains(WatchableAudioProperties.audioSeeking)) {
 			setState(() {});
 		}

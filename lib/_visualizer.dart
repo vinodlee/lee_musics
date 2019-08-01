@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:lee_musics/_audio_visualizer.dart';
 import 'package:lee_musics/lee_musics.dart';
-//import 'package:logging/logging.dart';
+import 'package:lee_logging/lee_logging.dart';
 
-//final _log = new Logger('Visualizer');
+final _log = new Logger('Visualizer');
 
 class Visualizer extends StatefulWidget {
 	
@@ -29,7 +29,7 @@ class _VisualizerState extends State<Visualizer> {
 			..activate()
 			..addListener(
 				fftCallback: (List<int> samples) {
-//					_log.fine('Got FFT samples: $samples');
+					_log.fine('Got FFT samples: $samples');
 					setState(() => fft = samples);
 				}
 			);

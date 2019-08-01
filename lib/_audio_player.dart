@@ -1,9 +1,9 @@
 import 'dart:ui' show VoidCallback;
 
 import 'package:flutter/services.dart';
-//import 'package:logging/logging.dart';
+import 'package:lee_logging/lee_logging.dart';
 
-//final _log = new Logger('AudioPlayer');
+final _log = new Logger('AudioPlayer');
 
 class AudioPlayer {
 	final String playerId;
@@ -26,14 +26,14 @@ class AudioPlayer {
 		_setState(AudioPlayerState.idle);
 		
 		channel.setMethodCallHandler((MethodCall call) {
-//			_log.fine('Received channel message: ${call.method}');
+			_log.fine('Received channel message: ${call.method}');
 			switch (call.method) {
 				case "onFftVisualization":
-//					_log.fine('FFT Visualization:');
-//					_log.fine('${call.arguments['fft'].runtimeType}');
+					_log.fine('FFT Visualization:');
+					_log.fine('${call.arguments['fft'].runtimeType}');
 					break;
 				case "onAudioLoading":
-//					_log.fine('onAudioLoading');
+					_log.fine('onAudioLoading');
 					
 					// If new audio is loading then we have no playhead position and we
 					// don't know the audio length.
@@ -47,14 +47,14 @@ class AudioPlayer {
 					}
 					break;
 				case "onBufferingUpdate":
-//					_log.fine('onBufferingUpdate');
+					_log.fine('onBufferingUpdate');
 					
 					final percent = call.arguments['percent'];
 					_setBufferedPercent(percent);
 					
 					break;
 				case "onAudioReady":
-//					_log.fine('onAudioReady, audioLength: ${call.arguments['audioLength']}');
+					_log.fine('onAudioReady, audioLength: ${call.arguments['audioLength']}');
 					
 					// When audio is ready then we get passed the length of the clip.
 					final audioLengthInMillis = call.arguments['audioLength'];
@@ -68,7 +68,7 @@ class AudioPlayer {
 					}
 					break;
 				case "onPlayerPlaying":
-//					_log.fine('onPlayerPlaying');
+					_log.fine('onPlayerPlaying');
 					
 					_setState(AudioPlayerState.playing);
 					
@@ -77,13 +77,13 @@ class AudioPlayer {
 					}
 					break;
 				case "onPlayerPlaybackUpdate":
-//					_log.fine('onPlayerPlaybackUpdate, position: ${call.arguments['position']}');
+					_log.fine('onPlayerPlaybackUpdate, position: ${call.arguments['position']}');
 					
 					// The playhead has moved, update our playhead position reference.
 					_setPosition(new Duration(milliseconds: call.arguments['position']));
 					break;
 				case "onPlayerPaused":
-//					_log.fine('onPlayerPaused');
+					_log.fine('onPlayerPaused');
 					
 					_setState(AudioPlayerState.paused);
 					
@@ -92,7 +92,7 @@ class AudioPlayer {
 					}
 					break;
 				case "onPlayerStopped":
-//					_log.fine('onPlayerStopped');
+					_log.fine('onPlayerStopped');
 					
 					// When we are stopped it means more than just paused. The audio will
 					// have to be reloaded. Therefore, we no longer have a playhead
@@ -107,7 +107,7 @@ class AudioPlayer {
 					}
 					break;
 				case "onPlayerCompleted":
-//					_log.fine('onPlayerCompleted');
+					_log.fine('onPlayerCompleted');
 					
 					_setState(AudioPlayerState.completed);
 					
@@ -209,7 +209,7 @@ class AudioPlayer {
 	}
 	
 	void loadMedia(Uri uri) {
-//		_log.fine('loadMedia()');
+		_log.fine('loadMedia()');
 		// TODO: how to represent media
 		channel.invokeMethod(
 			'audioplayer/$playerId/load',
@@ -218,17 +218,17 @@ class AudioPlayer {
 	}
 	
 	void play() {
-//		_log.fine('play()');
+		_log.fine('play()');
 		channel.invokeMethod('audioplayer/$playerId/play');
 	}
 	
 	void pause() {
-//		_log.fine('pause()');
+		_log.fine('pause()');
 		channel.invokeMethod('audioplayer/$playerId/pause');
 	}
 	
 	void seek(Duration duration) {
-//		_log.fine('seek(): $duration');
+		_log.fine('seek(): $duration');
 		
 		// We optimistically set isSeeking to true because waiting for the channel
 		// to report back makes it very difficult for the UI to rely on AudioPlayer's
@@ -247,7 +247,7 @@ class AudioPlayer {
 	}
 	
 	void stop() {
-//		_log.fine('stop()');
+		_log.fine('stop()');
 		channel.invokeMethod('audioplayer/$playerId/stop');
 	}
 }

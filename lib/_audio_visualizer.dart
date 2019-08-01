@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
-//import 'package:logging/logging.dart';
+import 'package:lee_logging/lee_logging.dart';
 
-//Logger _log = new Logger('AudioVisualizer');
+Logger _log = new Logger('AudioVisualizer');
 
 class AudioVisualizer {
 	
@@ -13,7 +13,7 @@ class AudioVisualizer {
 		this.channel,
 	}) {
 		channel.setMethodCallHandler((MethodCall call) {
-//			_log.fine('Received AudioVisualizer call: ${call.method}');
+			_log.fine('Received AudioVisualizer call: ${call.method}');
 			
 			switch (call.method) {
 				case 'onFftVisualization':
